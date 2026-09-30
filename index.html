@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio de Presentaciones — CITEG 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f8fafc; font-family: 'Inter', system-ui, sans-serif; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Base de datos de presentaciones extraída del documento original
+        const data = [
+            // SIMPOSIOS
+            {
+                title: "TUTORÍA CON IA EN ARQUITECTURA: COMPARACIÓN ENTRE UN CHAT ENTRENADO CON DOCUMENTOS CURADOS Y UN PROMPT RECTOR CON PERSPECTIVA DE GÉNERO",
+                url: "https://drive.google.com/file/d/1yB7usHll241iYgtuQb71uUe5AbaQZvfA/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en tutoría con ia en arquitectura: comparación entre un chat entrenado con documentos curados y un prompt rector con perspectiva de género.",
+                category: "Simposios",
+                subcategory: "Acciones progresivas de colaboración hacia la inserción de mujeres en STEM",
+                author: "Patricia Torres-S\u00E1nchez"
+            },
+            {
+                title: "Género, prácticas digitales y comprensión lectora en futuros docentes de Educación Primaria en Panamá",
+                url: "https://drive.google.com/file/d/1I7rbnYuo2hHjVStwfbV39P_zLWuNmSUZ/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en género, prácticas digitales y comprensión lectora en futuros docentes de educación primaria en panamá.",
+                category: "Simposios",
+                subcategory: "CIEDU: Educación, Tecnología y Género",
+                author: "Delfina D\u2019Alfonso; Daniel Cubilla-Bonnetier; Nadia De Le\u00F3n Saut\u00FA"
+            },
+            {
+                title: "ACEPTACIÓN Y USO DE LA INTELIGENCIA ARTIFICIAL GENERATIVA EN EDUCACIÓN SUPERIOR: DIFERENCIAS POR ROL INSTITUCIONAL Y GÉNERO",
+                url: "https://drive.google.com/file/d/1vnwtWN0P6uDpNw4sPNj1JjfNvVDadrRz/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en aceptación y uso de la inteligencia artificial generativa en educación superior: diferencias por rol institucional y género.",
+                category: "Simposios",
+                subcategory: "CIEDU: Educación, Tecnología y Género",
+                author: "Aura L. L\u00F3pez de Ramos"
+            },
+            {
+                title: "BRECHAS DE GÉNERO EN LA ADMISIÓN UNIVERSITARIA Y AVANCES DEL ESTUDIO SOBRE CARRERAS STEM CON BAJA MATRÍCULA FEMENINA EN PANAMÁ",
+                url: "http://drive.google.com/file/d/1F1DGuwGgJPdSsqVpnmjljCy8qh95WRuY/view",
+                platform: "Google Drive",
+                description: "Analiza brechas de género en la admisión universitaria y avances del estudio sobre carreras stem con baja matrícula femenina en panamá y sus efectos sobre la equidad de género.",
+                category: "Simposios",
+                subcategory: "CIEDU: Educación, Tecnología y Género",
+                author: "Nadia De Le\u00F3n Saut\u00FA; Andrea Melgar; Eugenia Rodr\u00EDguez; Mayra Miller; Alba Mu\u00F1oz; Aura L\u00F3pez; Mariana Le\u00F3n; Ana Mireya D\u00EDaz; Delfina D\u2019Alfonso; Egidio Gonz\u00E1lez; Andrea Palacios; Joanna Ngo"
+            },
+            {
+                title: "Educación ambiental, tecnología y brechas territoriales en Panamá: hacia una nueva línea de investigación sobre Ambiente y Resiliencia",
+                url: "https://drive.google.com/file/d/17aNiHoIDhF6r71YBXRWJ9GYzdDl-e1S-/view",
+                platform: "Google Drive",
+                description: "Analiza educación ambiental, tecnología y brechas territoriales en panamá: hacia una nueva línea de investigación sobre ambiente y resiliencia y sus efectos sobre la equidad de género.",
+                category: "Simposios",
+                subcategory: "CIEDU: Educación, Tecnología y Género",
+                author: "Lenin Alfonso Morales"
+            },
+            {
+                title: "TEA y capacitación tecnológica: Un estudio comparativo por género",
+                url: "https://www.youtube.com/watch?v=DSuGm0zHtdY",
+                platform: "YouTube",
+                description: "Presentación centrada en tea y capacitación tecnológica: un estudio comparativo por género.",
+                category: "Simposios",
+                subcategory: "Competencias para la identificación de contenidos generados por IA",
+                author: "Jos\u00E9 Fern\u00E1ndez Cerero"
+            },
+            {
+                title: "¿Existe una brecha de género en la aceptación de la inteligencia artificial generativa en la universidad?",
+                url: "https://drive.google.com/file/d/1EGHePLMfSnJBRf9vAR-Sy2LGaxvq67rB/view?usp=sharing",
+                platform: "Google Drive",
+                description: "Examina la pregunta planteada en «¿Existe una brecha de género en la aceptación de la inteligencia artificial generativa en la universidad?» desde la perspectiva educativa y de género.",
+                category: "Simposios",
+                subcategory: "Competencias para la identificación de contenidos generados por IA",
+                author: "Ariadna Gallego; Carlos (apellido no visible en la portada)"
+            },
+            {
+                title: "Sesgos de género en los modelos de inteligencia artificial: una revisión sistemática sobre su impacto en los contenidos generados y su detección por docentes y alumnado",
+                url: "https://drive.google.com/file/d/1zDyi3U_73oJP1irD0fVI67y4w2JPyXY6/view?usp=sharing",
+                platform: "Google Drive",
+                description: "Sintetiza la evidencia disponible sobre sesgos de género en los modelos de inteligencia artificial: una revisión sistemática sobre su impacto en los contenidos generados y su detección por docentes y alumnado.",
+                category: "Simposios",
+                subcategory: "Competencias para la identificación de contenidos generados por IA",
+                author: "Mar\u00EDa Carrera-Cort\u00E9s; Irene Ben\u00EDtez-Franco"
+            },
+            {
+                title: "Diferencias de género en las dimensiones de la competencia digital docente en inteligencia artificial y la satisfacción laboral del profesorado",
+                url: "https://drive.google.com/file/d/1LfduivEIxNjX20C9Phf8qHPPy_tGfszW/view?usp=sharing",
+                platform: "Google Drive",
+                description: "Presentación centrada en diferencias de género en las dimensiones de la competencia digital docente en inteligencia artificial y la satisfacción laboral del profesorado.",
+                category: "Simposios",
+                subcategory: "Competencias para la identificación de contenidos generados por IA",
+                author: "Elvira Rodr\u00EDguez Tenorio; Pablo Cavero L\u00F3pez; Mar\u00EDa Miravete Gracia"
+            },
+            {
+                title: "Juegos STEM, Inteligencia Artificial y la redefinición de la educación digital con perspectiva de género",
+                url: "https://drive.google.com/file/d/10ujPUvKMTEKk7Xs-aLQFgwUMQ4t2NI3y/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en juegos stem, inteligencia artificial y la redefinición de la educación digital con perspectiva de género.",
+                category: "Simposios",
+                subcategory: "Educación Digital con perspectiva de género",
+                author: "Alejandra Ruiz"
+            },
+            {
+                title: "REALIDAD VIRTUAL EN FISIOLOGÍA: APRENDIZAJE, RETENCIÓN Y PERSPECTIVA DE GÉNERO EN EL AULA ITEVR",
+                url: "https://www.youtube.com/watch?v=aENjVCuwkng",
+                platform: "YouTube",
+                description: "Presentación centrada en realidad virtual en fisiología: aprendizaje, retención y perspectiva de género en el aula itevr.",
+                category: "Simposios",
+                subcategory: "Educación Digital con perspectiva de género",
+                author: "Augusto Cabrera-Duffaut"
+            },
+            {
+                title: "TALLERES EXPERIMENTALES STEM SIN FRONTERAS",
+                url: "https://drive.google.com/drive/folders/1uhZZ1mmxLxxLzJ2hUosIWKyV4fZLyYER",
+                platform: "Google Drive",
+                description: "Describe una experiencia o propuesta práctica relacionada con talleres experimentales stem sin fronteras.",
+                category: "Simposios",
+                subcategory: "Educación Digital con perspectiva de género",
+                author: "Jacqueline Llanos Proa\u00F1o; Silvia Alpusig Cuichan; Paola Velasco S\u00E1nchez; Jenny Calvopi\u00F1a Osorio"
+            },
+            {
+                title: "La experiencia de la XR Lab UTPL con tecnologías inmersivas en educación superior",
+                url: "https://drive.google.com/file/d/1y0aIwtIt18gtE5BNluAwZa9Z9MXUPu8o/view?usp=sharing",
+                platform: "Google Drive",
+                description: "Describe una experiencia o propuesta práctica relacionada con la experiencia de la xr lab utpl con tecnologías inmersivas en educación superior.",
+                category: "Simposios",
+                subcategory: "Educación Digital con perspectiva de género",
+                author: "Martha Vanessa Agila Palacios"
+            },
+            {
+                title: "Simposio completo",
+                url: "https://drive.google.com/file/d/1IQ3FmUDKiwbgOncg0heDh6YC4nvhdQz5/view",
+                platform: "Google Drive",
+                description: "Grabación completa del simposio sobre formación docente, innovación tecnológica e inclusión digital.",
+                category: "Simposios",
+                subcategory: "Formación docente e innovación tecnológica para una cultura digital inclusiva",
+                author: "Mar\u00EDa Pilar C\u00E1ceres Reche"
+            },
+            {
+                title: "Ciberseguridad en la formación inicial docente: ¿hay brecha de género?",
+                url: "https://drive.google.com/file/d/1JjZbSYU5cEbyb8dhf-l-psADnolZaqmB/view?usp=sharing",
+                platform: "Google Drive",
+                description: "Analiza ciberseguridad en la formación inicial docente: ¿hay brecha de género? y sus efectos sobre la equidad de género.",
+                category: "Simposios",
+                subcategory: "Género y Ciberseguridad en la Formación Inicial Docente",
+                author: "Miriam \u00C1greda Montoro"
+            },
+            {
+                title: "La competencia en Ciberseguridad del profesorado en formación inicial",
+                url: "https://youtu.be/SROkL27vDC0?si=ERw3n-XhC30X0QqO",
+                platform: "YouTube",
+                description: "Presentación centrada en la competencia en ciberseguridad del profesorado en formación inicial.",
+                category: "Simposios",
+                subcategory: "Género y Ciberseguridad en la Formación Inicial Docente",
+                author: "Ana Mar\u00EDa Ortiz-Col\u00F3n"
+            },
+            {
+                title: "Taxonomía de competencias técnicas en ciberseguridad para la reducción de brechas de género",
+                url: "https://youtu.be/0SdnEH5j5yk",
+                platform: "YouTube",
+                description: "Analiza taxonomía de competencias técnicas en ciberseguridad para la reducción de brechas de género y sus efectos sobre la equidad de género.",
+                category: "Simposios",
+                subcategory: "Género y Ciberseguridad en la Formación Inicial Docente",
+                author: "Lina Guadalupe Garc\u00EDa Cabrera"
+            },
+            {
+                title: "Un simulador inteligente basado en IA para la formación en ciberseguridad con perspectiva de género en la Formación Inicial Docente",
+                url: "https://www.youtube.com/watch?v=gE7lVdm8OrA",
+                platform: "YouTube",
+                description: "Presentación centrada en un simulador inteligente basado en ia para la formación en ciberseguridad con perspectiva de género en la formación inicial docente.",
+                category: "Simposios",
+                subcategory: "Género y Ciberseguridad en la Formación Inicial Docente",
+                author: "Francisco Jos\u00E9 Quesada Real"
+            },
+            {
+                title: "Ciberseguridad y perspectiva de género en la formación inicial docente: percepciones y necesidades formativas del profesorado en formación.",
+                url: "https://reccloud.com/es/watch?uniqid=azrlbyf",
+                platform: "RecCloud",
+                description: "Presentación centrada en ciberseguridad y perspectiva de género en la formación inicial docente: percepciones y necesidades formativas del profesorado en formación.",
+                category: "Simposios",
+                subcategory: "Género y Ciberseguridad en la Formación Inicial Docente",
+                author: "Autor\u00EDa no visible en la portada"
+            },
+            {
+                title: "Queridos desarrolladores, tenemos que hablar. Sesgos de género, transparencia y responsabilidad en los agentes conversacionales basados en IA",
+                url: "https://drive.google.com/file/d/1mhMRiDi8ZLsbSj7WoMKN7DCARDlfigSj/view",
+                platform: "Google Drive",
+                description: "Analiza queridos desarrolladores, tenemos que hablar. sesgos de género, transparencia y responsabilidad en los agentes conversacionales basados en ia y sus efectos sobre la equidad de género.",
+                category: "Simposios",
+                subcategory: "Inteligencia Artificial, Ciencia de Datos y Visualización",
+                author: "Andrea E. Cotino Arbelo"
+            },
+            {
+                title: "DESIGUALDADES DE GÉNERO Y SALUD MENTAL: IMPACTO DE LOS FILTROS DE BELLEZA A TRAVÉS DE UNA REVISIÓN SISTEMÁTICA DE LA LITERATURA",
+                url: "https://drive.google.com/file/d/1YnEtCOat3N1627qVYXAi_KVouScOjX5d/view",
+                platform: "Google Drive",
+                description: "Sintetiza la evidencia disponible sobre desigualdades de género y salud mental: impacto de los filtros de belleza a través de una revisión sistemática de la literatura.",
+                category: "Simposios",
+                subcategory: "Inteligencia Artificial, Ciencia de Datos y Visualización",
+                author: "Loida Su\u00E1rez-Guerra; Carina Gonz\u00E1lez-Gonz\u00E1lez"
+            },
+            {
+                title: "Minería de texto para la detección de sesgos de género en proyectos de investigación",
+                url: "https://drive.google.com/file/d/1iyhKpFsHRDzY0bs5z_3WXvo49WmlKi5B/view",
+                platform: "Google Drive",
+                description: "Describe una experiencia o propuesta práctica relacionada con minería de texto para la detección de sesgos de género en proyectos de investigación.",
+                category: "Simposios",
+                subcategory: "Inteligencia Artificial, Ciencia de Datos y Visualización",
+                author: "Macielle Helene Costa"
+            },
+            {
+                title: "LA MERCANTILIZACIÓN DIGITAL DEL CUERPO DE LAS MUJERES: DE ONLYFANS AL PORNOCAPITALISMO DE PLATAFORMAS CON IA GENERATIVA",
+                url: "https://drive.google.com/file/d/102vXaFpDD_DZozaRs313xAn1V_7F0SiW/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en la mercantilización digital del cuerpo de las mujeres: de onlyfans al pornocapitalismo de plataformas con ia generativa.",
+                category: "Simposios",
+                subcategory: "Inteligencia Artificial, Ciencia de Datos y Visualización",
+                author: "Emma Marrero Gonz\u00E1lez"
+            },
+            {
+                title: "Investigadoras gallegas en Tecnología Educativa",
+                url: "https://nubeusc-my.sharepoint.com/:v:/g/personal/lorena_casal_usc_es/IQD4pGHUNKc2QJLe3TvsXex7AdY7nh6jqomXSzEcVjgTFss?e=zhklpz",
+                platform: "SharePoint/OneDrive",
+                description: "Presentación centrada en investigadoras gallegas en tecnología educativa.",
+                category: "Simposios",
+                subcategory: "Liderazgo femenino en Tecnología Educativa",
+                author: "Carmen Fern\u00E1ndez-Morante; Beatriz Cebreiro L\u00F3pez"
+            },
+            {
+                title: "Liderazgo femenino desde el área de e-Learning del Cesga",
+                url: "https://nubeusc-my.sharepoint.com/:v:/g/personal/lorena_casal_usc_es/IQA2dP0x5dXHTInAfnipXBbYAbnGI58jJ2l8HioNLjawA3o?e=eChEXA",
+                platform: "SharePoint/OneDrive",
+                description: "Presentación centrada en liderazgo femenino desde el área de e-learning del cesga.",
+                category: "Simposios",
+                subcategory: "Liderazgo femenino en Tecnología Educativa",
+                author: "Mar\u00EDa Jos\u00E9 Malmierca"
+            },
+            {
+                title: "Ecologías de aprendizaje: desde la digitalización a la inteligencia artificial",
+                url: "https://nubeusc-my.sharepoint.com/:v:/g/personal/lorena_casal_usc_es/IQCFLivPOe-lRr_OKZolv56DASCJV4ktgQpBSD2X2-_ezRI?e=s5QeC2",
+                platform: "SharePoint/OneDrive",
+                description: "Presentación centrada en ecologías de aprendizaje: desde la digitalización a la inteligencia artificial.",
+                category: "Simposios",
+                subcategory: "Liderazgo femenino en Tecnología Educativa",
+                author: "Mercedes Gonz\u00E1lez Sanmamed; Mar\u00EDa Bego\u00F1a Codesal Pati\u00F1o"
+            },
+            {
+                title: "Antes de elegir: primeras manifestaciones de la brecha de género en STEM durante la Educación Primaria y Secundaria en Europa",
+                url: "https://nubeusc-my.sharepoint.com/:v:/g/personal/lorena_casal_usc_es/IQAk6bxQticFQ6hKnaB8Yx03AX4pL-FhxltM5BPy4TDtcts?e=7dyTpQ",
+                platform: "SharePoint/OneDrive",
+                description: "Analiza antes de elegir: primeras manifestaciones de la brecha de género en stem durante la educación primaria y secundaria en europa y sus efectos sobre la equidad de género.",
+                category: "Simposios",
+                subcategory: "Liderazgo femenino en Tecnología Educativa",
+                author: "Ainara Romero Andonegui"
+            },
+            {
+                title: "SESGOS DE GÉNERO Y JUSTICIA SOCIAL EN MODELOS DE LENGUAJE A GRAN ESCALA, ANÁLISIS DEL CURSO LLMS FOR LOW-RESOURCE LANGUAGES",
+                url: "https://www.youtube.com/watch?v=yu1jyLVNSBk",
+                platform: "YouTube",
+                description: "Analiza sesgos de género y justicia social en modelos de lenguaje a gran escala, análisis del curso llms for low-resource languages y sus efectos sobre la equidad de género.",
+                category: "Simposios",
+                subcategory: "LLM y metaverso",
+                author: "Profe Carlota (apellido no visible en la portada)"
+            },
+            {
+                title: "DISEÑO DE PERSONAJES DESDE LA PERSPECTIVA DE GÉNERO EN LA NARRATIVA DE UNA GAMIFICACIÓN",
+                url: "https://www.youtube.com/watch?v=g8y9tvF51oY",
+                platform: "YouTube",
+                description: "Presenta una propuesta de diseño aplicada a diseño de personajes desde la perspectiva de género en la narrativa de una gamificación.",
+                category: "Simposios",
+                subcategory: "LLM y metaverso",
+                author: "Profe Carlota (apellido no visible en la portada)"
+            },
+            {
+                title: "AUDITORÍA EXPLORATORIA DEL SESGO DE GÉNERO EN LA GENERACIÓN DE IMÁGENES MEDIANTE INTELIGENCIA ARTIFICIAL",
+                url: "https://www.youtube.com/watch?v=horYCFD5cQw",
+                platform: "YouTube",
+                description: "Analiza auditoría exploratoria del sesgo de género en la generación de imágenes mediante inteligencia artificial y sus efectos sobre la equidad de género.",
+                category: "Simposios",
+                subcategory: "LLM y metaverso",
+                author: "Alicia Alvarado Escudero; Gerardo Arriaza Fern\u00E1ndez"
+            },
+            {
+                title: "BUENAS PRÁCTICAS DOCENTES CON IA GENERATIVA, LA PERSPECTIVA DE GÉNERO",
+                url: "https://www.youtube.com/watch?v=cPDZeoyzHSQ",
+                platform: "YouTube",
+                description: "Presentación centrada en buenas prácticas docentes con ia generativa, la perspectiva de género.",
+                category: "Simposios",
+                subcategory: "LLM y metaverso",
+                author: "Bern\u00E1rdez et al. (nombres no visibles en la portada)"
+            },
+            {
+                title: "DECONSTRUYENDO LA MIRADA DIGITAL: UNA METODOLOGÍA PARA LA AUDITORÍA DE GÉNERO EN HERRAMIENTAS DE IA PARA LA FORMACIÓN DOCENTE",
+                url: "https://www.youtube.com/watch?v=GwLgYgn-_GY",
+                platform: "YouTube",
+                description: "Aborda deconstruyendo la mirada digital: una metodología para la auditoría de género en herramientas de ia para la formación docente con foco en el desarrollo profesional y la inclusión.",
+                category: "Simposios",
+                subcategory: "LLM y metaverso",
+                author: "Torres et al. (nombres no visibles en la portada)"
+            },
+            {
+                title: "DISEÑO DE PROGRAMAS FORMATIVOS INCLUSIVOS CON IA: UN MARCO CO-CREATIVO PARA LA FORMACIÓN DE FORMADORES CON PERSPECTIVA DE GÉNERO",
+                url: "https://www.youtube.com/watch?v=VsC_Z43K5ic",
+                platform: "YouTube",
+                description: "Presenta una propuesta de diseño aplicada a diseño de programas formativos inclusivos con ia: un marco co-creativo para la formación de formadores con perspectiva de género.",
+                category: "Simposios",
+                subcategory: "LLM y metaverso",
+                author: "Padr\u00F3n et al. (nombres no visibles en la portada)"
+            },
+            {
+                title: "Identidad digital y género: la problemática de la publicación de contenido sexual y la manipulación de imágenes mediante inteligencia artificial",
+                url: "https://umurcia.zoom.us/rec/share/4KajFKbdxDqxNC3kbaRcZK9zJVXXymvBJyNBOZeIC5eTT0XkIMS1Uyg81_QSZYYS.5IdUwRpXXCn3_VD-",
+                platform: "Zoom",
+                description: "Presentación centrada en identidad digital y género: la problemática de la publicación de contenido sexual y la manipulación de imágenes mediante inteligencia artificial.",
+                category: "Simposios",
+                subcategory: "Más allá de la brecha digital de género",
+                author: "Isabel Guti\u00E9rrez Porl\u00E1n"
+            },
+            {
+                title: "Uso Académico de Tecnologías Digitales en la Formación Inicial Docente en Chile: Un Análisis por Sexo en Pedagogía en Inglés",
+                url: "https://youtu.be/3yyCuV7Zxic",
+                platform: "YouTube",
+                description: "Estudia uso académico de tecnologías digitales en la formación inicial docente en chile: un análisis por sexo en pedagogía en inglés y sus implicaciones educativas.",
+                category: "Simposios",
+                subcategory: "Más allá de la brecha digital de género",
+                author: "Miriam Le\u00F3n Herrera; Roxana Rebolledo Font de la Vall"
+            },
+            {
+                title: "Presencia, proceso y voz en el women in digital index 2025",
+                url: "https://rovira-my.sharepoint.com/:v:/g/personal/39931041-m_epp_urv_cat/IQC_feqOnetLTYrFQZVYiZC4ATQJk3lIZONoEjnqKvE0yGs?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=V5kx2u",
+                platform: "SharePoint/OneDrive",
+                description: "Presentación centrada en presencia, proceso y voz en el women in digital index 2025.",
+                category: "Simposios",
+                subcategory: "Más allá de la brecha digital de género",
+                author: "Autor\u00EDa no visible en la portada"
+            },
+            {
+                title: "Más allá del acceso: agencia tecnológica y brecha de género en la era de la ia generativa",
+                url: "https://rovira-my.sharepoint.com/:v:/g/personal/39931041-m_epp_urv_cat/IQCpO0OhEgpjTJ8xPaKHZhWaAUHX2M4HPZcvp5cmTOYQ2ag?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=9W5vdF",
+                platform: "SharePoint/OneDrive",
+                description: "Analiza más allá del acceso: agencia tecnológica y brecha de género en la era de la ia generativa y sus efectos sobre la equidad de género.",
+                category: "Simposios",
+                subcategory: "Más allá de la brecha digital de género",
+                author: "Isabel Mar\u00EDa G\u00F3mez-Trigueros"
+            },
+            {
+                title: "IA para todos/as: una propuesta de innovación educativa basada en inteligencia artificial para favorecer la inclusión del alumnado neurodivergente en educación infantil",
+                url: "https://drive.google.com/file/d/1P_AmlNzCxE5jO78mOLskSsF0jH01_n-k/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en ia para todos/as: una propuesta de innovación educativa basada en inteligencia artificial para favorecer la inclusión del alumnado neurodivergente en educación infantil.",
+                category: "Simposios",
+                subcategory: "Nuevos escenarios para la innovación educativa",
+                author: "J\u00E9nifer Salda\u00F1a Montero; \u00C1lvaro P\u00E9rez Garc\u00EDa"
+            },
+            {
+                title: "Innovación y buenas prácticas con el carnaval de Cádiz: el proyecto escuela municipal de carnaval",
+                url: "https://drive.google.com/file/d/1RdipcXBB-xKBOffm-qwWBRT_0znTiSbQ/view",
+                platform: "Google Drive",
+                description: "Describe una experiencia o propuesta práctica relacionada con innovación y buenas prácticas con el carnaval de cádiz: el proyecto escuela municipal de carnaval.",
+                category: "Simposios",
+                subcategory: "Nuevos escenarios para la innovación educativa",
+                author: "\u00C1lvaro P\u00E9rez Garc\u00EDa; Ignacio Sacaluga Rodr\u00EDguez"
+            },
+            {
+                title: "GAMIFICACIÓN Y TECNOLOGÍAS DIGITALES PARA EL DESARROLLO DE LA AUTONOMÍA EN EDUCACIÓN INFANTIL: DISEÑO DE UNA PROPUESTA DE INNOVACIÓN EDUCATIVA",
+                url: "https://drive.google.com/file/d/157s6gxfOfEJaVHrySW9chUaUlWVy6Dfw/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en gamificación y tecnologías digitales para el desarrollo de la autonomía en educación infantil: diseño de una propuesta de innovación educativa.",
+                category: "Simposios",
+                subcategory: "Nuevos escenarios para la innovación educativa",
+                author: "J\u00E9nifer Salda\u00F1a Montero; Ana Mar\u00EDa Reynoso Ramos"
+            },
+            {
+                title: "Género, convivencia y desvinculación escolar en la adolescencia: experiencia socioeducativa a través del proyecto ALA (2021-2024)",
+                url: "https://drive.google.com/file/d/1684HbtJEeSk85JCvbCAE_MqqmztQSjwo/view",
+                platform: "Google Drive",
+                description: "Describe una experiencia o propuesta práctica relacionada con género, convivencia y desvinculación escolar en la adolescencia: experiencia socioeducativa a través del proyecto ala (2021-2024).",
+                category: "Simposios",
+                subcategory: "Nuevos escenarios para la innovación educativa",
+                author: "Cosette Franco Mu\u00F1oz"
+            },
+            {
+                title: "Hospital de ortografía: TIC, ludificación y reflexión lingüística en la universidad",
+                url: "https://drive.google.com/file/d/1ej5yog55WwMP5e3v9IzNfjamjxAh5x7l/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en hospital de ortografía: tic, ludificación y reflexión lingüística en la universidad.",
+                category: "Simposios",
+                subcategory: "Nuevos escenarios para la innovación educativa",
+                author: "Patricia S\u00E1enz Valiente"
+            },
+            {
+                title: "Saludo de la Sra. Decana. Clara Pedraza",
+                url: "https://drive.google.com/file/d/1om5oKn2Z0BZTdynNORQgx0Q4V5vq2uun/view",
+                platform: "Google Drive",
+                description: "Intervención institucional de apertura a cargo de la decana Clara Pedraza.",
+                category: "Simposios",
+                subcategory: "Pedagogías emergentes, tecnologías exponenciales y género",
+                author: "Clara Esperanza Pedraza Goyeneche"
+            },
+            {
+                title: "Innovación social para la transformación y el desarrollo",
+                url: "https://drive.google.com/file/d/1HYNlLo2CzRSukM7ISraEWGzoprTZVPfs/view?usp=sharing",
+                platform: "Google Drive",
+                description: "Presentación centrada en innovación social para la transformación y el desarrollo.",
+                category: "Simposios",
+                subcategory: "Pedagogías emergentes, tecnologías exponenciales y género",
+                author: "Sandra Acevedo Zapata"
+            },
+            {
+                title: "Buen gobierno en la era de la ia: hacia un marco político y curricular para cerrar la brecha de género",
+                url: "https://www.youtube.com/watch?v=0jQhlMmZPRs",
+                platform: "YouTube",
+                description: "Analiza buen gobierno en la era de la ia: hacia un marco político y curricular para cerrar la brecha de género y sus efectos sobre la equidad de género.",
+                category: "Simposios",
+                subcategory: "Pedagogías emergentes, tecnologías exponenciales y género",
+                author: "Luz Miryam Moreno Rodr\u00EDguez"
+            },
+            {
+                title: "Formación Docente En Educación Superior Para Ecosistemas Educativos Inteligentes E Inclusivos",
+                url: "https://www.youtube.com/watch?v=pAuME3Loliw",
+                platform: "YouTube",
+                description: "Aborda formación docente en educación superior para ecosistemas educativos inteligentes e inclusivos.",
+                category: "Simposios",
+                subcategory: "Pedagogías emergentes, tecnologías exponenciales y género",
+                author: "Pablo Alexander Munevar; John Fredy Montes"
+            },
+            {
+                title: "¿Innovación o tradición? Una perspectiva de género sobre las preferencias del alumnado...",
+                url: "https://drive.google.com/file/d/10PfNBm6vuka2PQAH9NvI2u6lWE0bC3Bg/view",
+                platform: "Google Drive",
+                description: "Examina la pregunta planteada sobre las preferencias del alumnado ante las metodologías docentes.",
+                category: "Simposios",
+                subcategory: "Pedagogías emergentes, tecnologías exponenciales y género",
+                author: "Francisco Jos\u00E9 Castillo-D\u00EDaz"
+            },
+            {
+                title: "¿Quién educa al algoritmo? Pedagogías emergentes para la gobernanza de una IA...",
+                url: "https://www.youtube.com/watch?v=fw8kuY2oqO0",
+                platform: "YouTube",
+                description: "Examina la gobernanza de una inteligencia artificial transparente, segura y con perspectiva de género.",
+                category: "Simposios",
+                subcategory: "Pedagogías emergentes, tecnologías exponenciales y género",
+                author: "Sonia Ximena Moreno Molano"
+            },
+            {
+                title: "Adultas mayores y ciudadanía digital crítica: aportes de una revisión sistemática en clave postdigital",
+                url: "https://drive.google.com/file/d/1jaE5dKliOmYDsoS1xymBkmvKGnUMRA9l/view?usp=sharing",
+                platform: "Google Drive",
+                description: "Sintetiza la evidencia disponible sobre adultas mayores y ciudadanía digital crítica.",
+                category: "Simposios",
+                subcategory: "Rompiendo barreras: Adultas mayores y tecnología",
+                author: "Mar\u00EDa Inmaculada Carrasco Mart\u00EDn"
+            },
+            {
+                title: "Más allá del acceso: autoconfianza y la nueva brecha digital en la era de la IA",
+                url: "https://www.youtube.com/watch?v=IpLkaXUWxV0",
+                platform: "YouTube",
+                description: "Analiza más allá del acceso: autoconfianza y la nueva brecha digital en la era de la ia.",
+                category: "Simposios",
+                subcategory: "Rompiendo barreras: Adultas mayores y tecnología",
+                author: "Ana Duarte-Hueros; Ram\u00F3n Tirado-Morueta"
+            },
+            {
+                title: "Diseño metodológico para la inclusión digital de mujeres mayores: EXPERIENCIA CLICK_A",
+                url: "https://www.youtube.com/watch?v=YbKTlwwCmIw",
+                platform: "YouTube",
+                description: "Presenta una propuesta de diseño aplicada a inclusión digital de mujeres mayores.",
+                category: "Simposios",
+                subcategory: "Rompiendo barreras: Adultas mayores y tecnología",
+                author: "F. Javier L\u00F3pez S\u00E1nchez"
+            },
+            {
+                title: "Estrategias y políticas europeas para reducir la brecha digital de género en mujeres mayores",
+                url: "https://www.youtube.com/watch?v=mKJaeaksogU",
+                platform: "YouTube",
+                description: "Sintetiza la evidencia sobre estrategias y políticas europeas para reducir la brecha digital de género.",
+                category: "Simposios",
+                subcategory: "Rompiendo barreras: Adultas mayores y tecnología",
+                author: "Roc\u00EDo Illanes Segura"
+            },
+            {
+                title: "MUJERES MAYORES Y TIC: EL PODCAST COMO HERRAMIENTA DE INCLUSIÓN DIGITAL Y APRENDIZAJE ACTIVO",
+                url: "https://drive.google.com/file/d/1F1plwiGRGLlNmiL7A9h3F9af3iwWBpeO/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en mujeres mayores y tic: el podcast como herramienta de inclusión digital.",
+                category: "Simposios",
+                subcategory: "Rompiendo barreras: Adultas mayores y tecnología",
+                author: "Paula Pacheco D\u00EDaz; Bego\u00F1a Mora Jaureguialde"
+            },
+            {
+                title: "Design thinking para analizar la perspectiva de género en la inteligencia artificial generativa",
+                url: "https://drive.google.com/file/d/1pEogWf5sgoOvSF-GyQgTL11chIrfKnb3/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en design thinking para analizar la perspectiva de género.",
+                category: "Simposios",
+                subcategory: "Tecnologías emergentes e innovación para una educación universitaria",
+                author: "Eva Mar\u00EDa Aguaded-Ram\u00EDrez"
+            },
+            {
+                title: "Del diagnóstico a la mejora docente: Un itinerario digital para integrar la perspectiva de género",
+                url: "https://www.youtube.com/watch?v=FQkRwZ1aQwM",
+                platform: "YouTube",
+                description: "Presentación centrada en del diagnóstico a la mejora docente: un itinerario digital.",
+                category: "Simposios",
+                subcategory: "Tecnologías emergentes e innovación para una educación universitaria",
+                author: "Olga Buz\u00F3n Garc\u00EDa"
+            },
+            {
+                title: "Mujeres rurales en situación de reinvención profesional - Necesidades y desafíos",
+                url: "https://www.youtube.com/watch?v=zIcTGysHAeo",
+                platform: "YouTube",
+                description: "Presentación centrada en mujeres rurales en situación de reinvención profesional.",
+                category: "Simposios",
+                subcategory: "Tecnologías emergentes e innovación para una educación universitaria",
+                author: "Carolina Romero Garc\u00EDa"
+            },
+            {
+                title: "APRENDER A DETECTAR LOS SESGOS DE GÉNERO DE LA INTELIGENCIA ARTIFICIAL",
+                url: "https://uibes-my.sharepoint.com/:v:/g/personal/vfb008_id_uib_eu/IQAXTXme0F9tToMA2W1tZxM9ATQg_x_HsvNlj9ly4D-j5N8",
+                platform: "SharePoint/OneDrive",
+                description: "Describe una experiencia sobre detectar sesgos de género en IA.",
+                category: "Simposios",
+                subcategory: "Tecnologías emergentes, IA y alfabetización digital crítica",
+                author: "Virginia Ferreiro Basurto; Victoria A. Ferrer P\u00E9rez"
+            },
+            {
+                title: "Alfabetización digital crítica con personas adultas frente a las violencias de género en entornos virtuales",
+                url: "https://drive.google.com/file/d/12o1insOFGFYROmduGRm_6_WFkLxzn0St/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en alfabetización digital crítica frente a las violencias de género.",
+                category: "Simposios",
+                subcategory: "Tecnologías emergentes, IA y alfabetización digital crítica",
+                author: "Miriam Comet Donoso"
+            },
+            {
+                title: "Formación online para la intervención con madres e hijos/as víctimas de la violencia de género",
+                url: "https://drive.google.com/file/d/1HWOcvegRaLueRfMFLyK3UwdlhTMyzxmk/view?usp=sharing",
+                platform: "Google Drive",
+                description: "Aborda formación online para la intervención con madres e hijos/as víctimas de violencia.",
+                category: "Simposios",
+                subcategory: "Tecnologías emergentes, IA y alfabetización digital crítica",
+                author: "Miriam Comet Donoso; Carolina Quir\u00F3s Dom\u00EDnguez; Ruth Vil\u00E0 Ba\u00F1os"
+            },
+            {
+                title: "Evaluación de un programa formativo dirigido a jóvenes infractores para prevenir la ciberviolencia de género",
+                url: "https://drive.google.com/file/d/1TuO8k6E24AjgV-eCZmxvzr2YQHhonmYY/view?usp=sharing",
+                platform: "Google Drive",
+                description: "Analiza y evalúa evaluación de un programa formativo dirigido a jóvenes infractores.",
+                category: "Simposios",
+                subcategory: "Tecnologías emergentes, IA y alfabetización digital crítica",
+                author: "M. Jos\u00E9 Rubio Hurtado; Ruth Vil\u00E0 Ba\u00F1os"
+            },
+            {
+                title: "TRAS EL MATCH: DISEÑO DE UNA INVESTIGACIÓN SOBRE VIOLENCIA DIGITAL CONTRA LAS MUJERES",
+                url: "https://uibes-my.sharepoint.com/personal/vfb008_id_uib_eu/_layouts/15/stream.aspx...",
+                platform: "SharePoint/OneDrive",
+                description: "Presentación centrada en investigación sobre violencia digital en aplicaciones de citas.",
+                category: "Simposios",
+                subcategory: "Tecnologías emergentes, IA y alfabetización digital crítica",
+                author: "Victoria A. Ferrer P\u00E9rez; Virginia Ferreiro Basurto"
+            },
+            {
+                title: "Más allá del entretenimiento: género, redes sociales y aprendizaje de lenguas en la juventud española",
+                url: "https://youtu.be/-uoUwqAAyo4?si=eqDHpMk9wPtyb4C-",
+                platform: "YouTube",
+                description: "Presentación centrada en más allá del entretenimiento: género, redes sociales y aprendizaje de lenguas.",
+                category: "Simposios",
+                subcategory: "Tecnologías emergentes y género",
+                author: "Francisco Javier Palacios-Hidalgo"
+            },
+            {
+                title: "¿Reducen o perpetúan las tecnologías emergentes las brechas de género en el aprendizaje de lenguas?",
+                url: "https://youtu.be/zxi4_xr7Km0?si=pYx9sFbWKbFFawSw",
+                platform: "YouTube",
+                description: "Examina si reducen o perpetúan las brechas de género en el aprendizaje.",
+                category: "Simposios",
+                subcategory: "Tecnologías emergentes y género",
+                author: "Cristina A. Huertas-Abril"
+            },
+            {
+                title: "Autocontrol, autoestima y autoeficacia en el uso de herramientas de inteligencia artificial",
+                url: "https://nubeusc-my.sharepoint.com/:v:/g/personal/lorena_casal_usc_es/IQAk6bxQticFQ6hKnaB8Yx03AX4pL-FhxltM5BPy4TDtcts?e=7dyTpQ",
+                platform: "SharePoint/OneDrive",
+                description: "Presentación centrada en autocontrol, autoestima y autoeficacia en IA.",
+                category: "Simposios",
+                subcategory: "Tecnologías emergentes y género",
+                author: "Autor\u00EDa no verificable: el enlace abre otra presentaci\u00F3n"
+            },
+            {
+                title: "TECNOLOGÍA EN EL AULA: ¿QUÉ PAPEL TIENE EN LA PLANIFICACIÓN DOCENTE?",
+                url: "https://drive.google.com/file/d/15Ddh0P9wIJfBlax8gYsFfRlDryAFbaUP/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en tecnología en el aula.",
+                category: "Simposios",
+                subcategory: "Tecnologías emergentes y género",
+                author: "Roc\u00EDo Luque Gonz\u00E1lez"
+            },
+            {
+                title: "¿Usan igual la inteligencia artificial las alumnas y los alumnos?",
+                url: "https://www.youtube.com/watch?v=F2V6e8TbrG8",
+                platform: "YouTube",
+                description: "Examina prevalencia y propósitos de uso de herramientas de IA en estudiantado universitario.",
+                category: "Simposios",
+                subcategory: "Tecnologías emergentes y género",
+                author: "Inmaculada Mar\u00EDn-L\u00F3pez"
+            },
+            {
+                title: "Todas las ponencias invitadas del simposio",
+                url: "https://drive.google.com/drive/folders/14Y2hCalrHdUGKdR8-98KGBVoj4CsPpWY",
+                platform: "Google Drive",
+                description: "Grabación conjunta de todas las ponencias invitadas incluidas en este simposio.",
+                category: "Simposios",
+                subcategory: "Tecnología y perspectiva de género en educación",
+                author: "Covadonga Arroyo Garc\u00EDa; \u00D3scar Alonso \u00C1lvarez; Eva \u00C1lvarez Ramos; Milagrosa Parrado Collantes; Carmen Romero Garc\u00EDa"
+            },
+
+            // COMUNICACIONES VIRTUALES
+            {
+                title: "Alfabetización sociocrítica en inteligencia artificial: una lectura educativa desde la perspectiva de género",
+                url: "https://drive.google.com/file/d/1jpIwbRhJu1Cna-edL41WiJelJg67pjy9/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en alfabetización sociocrítica en inteligencia artificial.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Brecha digital y género",
+                author: "Antonio Aguilar G\u00F3mez"
+            },
+            {
+                title: "Género y tecnologías emergentes en el periodismo de opinión: hibridación retórica del articulismo femenino en Substack",
+                url: "https://drive.google.com/file/d/1ZdVkDT4mZ1R6kgBIhCuTFK7feCmVXdKT/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en género y tecnologías emergentes en el periodismo de opinión.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Brecha digital y género",
+                author: "Luc\u00EDa C\u00E1novas Moreno"
+            },
+            {
+                title: "DIGITALIZACIÓN DE LOS PROCEDIMIENTOS ADMINISTRATIVOS UNIVERSITARIOS Y EJERCICIO EFECTIVO DE LOS DERECHOS DE LAS MUJERES VÍCTIMAS DE VIOLENCIA DE GÉNERO",
+                url: "https://drive.google.com/file/d/1IuezaJ4rOOY49FxzJA1GNElY-gwPJWRy/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en digitalización de los procedimientos administrativos universitarios.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Brecha digital y género",
+                author: "Flor Ruiz de la Oliva Mu\u00F1oz"
+            },
+            {
+                title: "La Brecha de Género en STEAM: Impacto de una Experiencia Práctica con Micro:bit",
+                url: "https://www.youtube.com/watch?v=getPXs6bAIA",
+                platform: "YouTube",
+                description: "Describe una experiencia o propuesta práctica relacionada con la brecha de género en steam.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Brecha digital y género",
+                author: "Mar\u00EDa Napal"
+            },
+            {
+                title: "Algoritmos, brecha digital y género: Agencia comunicativa de mujeres mayores y creadoras de contenido",
+                url: "https://drive.google.com/file/d/1UNDgBvhiM_9C-D5-_c5Zg8J8SotfVq6u/view",
+                platform: "Google Drive",
+                description: "Analiza algoritmos, brecha digital y género: agencia comunicativa de mujeres mayores.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Brecha digital y género",
+                author: "Paula Pacheco D\u00EDaz; Mar\u00EDa Inmaculada Carrasco Mart\u00EDn"
+            },
+            {
+                title: "Proyecto en-red-ods: la agenda 2030 en los planes de estudio de periodismo en andalucía",
+                url: "https://www.youtube.com/watch?v=b4lczA_YKeQ",
+                platform: "YouTube",
+                description: "Describe una experiencia o propuesta práctica relacionada con proyecto en-red-ods.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Casos de éxito, experiencias innovadoras y buenas prácticas docentes",
+                author: "Inma Tobar Fern\u00E1ndez"
+            },
+            {
+                title: "Incorporar la perspectiva de género en la docencia universitaria: ¿Disponemos de criterios para hacerlo?",
+                url: "https://drive.google.com/file/d/1pxwLd3Bb_vGguY6cp0UEaCgdgHmvE-VB/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en incorporar la perspectiva de género en la docencia universitaria.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Casos de éxito, experiencias innovadoras y buenas prácticas docentes",
+                author: "Cristina Dom\u00EDnguez Gordillo"
+            },
+            {
+                title: "Diseñar actividades docentes universitarias con perspectiva de género: una propuesta de herramienta",
+                url: "https://drive.google.com/file/d/1n2_oyIuZlJ84hmlCEKInCF0uYQJ3WNhy/view",
+                platform: "Google Drive",
+                description: "Presenta una propuesta de diseño aplicada a diseñar actividades docentes universitarias con perspectiva de género.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Casos de éxito, experiencias innovadoras y buenas prácticas docentes",
+                author: "Cristina Dom\u00EDnguez Gordillo"
+            },
+            {
+                title: "¿La mentoría en Technovation Girls transforma al estudiantado univesitario?",
+                url: "https://dauam-my.sharepoint.com/...",
+                platform: "SharePoint/OneDrive",
+                description: "Estudio de caso sobre el impacto de una actividad formativa universitaria de Aprendizaje-Servicio.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Casos de éxito, experiencias innovadoras y buenas prácticas docentes",
+                author: "Autor\u00EDa no visible: el enlace est\u00E1 incompleto"
+            },
+            {
+                title: "Uso del polimedia como tecnología emergente para la defensa del trabajo fin de máster",
+                url: "https://drive.google.com/file/d/1PQbl9RM-w0J_jFh3L1-HI1yzIlt1JzmX/view",
+                platform: "Google Drive",
+                description: "Estudia uso del polimedia como tecnología emergente.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Casos de éxito, experiencias innovadoras y buenas prácticas docentes",
+                author: "\u00C1ngel Puentes Puente; Roc\u00EDo Pi\u00F1ero-Viru\u00E9"
+            },
+            {
+                title: "DEL CUENTO AL BUTAI (CREATIVIDAD Y FABRICACIÓN DIGITAL PARA LA EQUIDAD DE GÉNERO EN EDUCACIÓN PRIMARIA)",
+                url: "https://drive.google.com/file/d/1WVv1HkoeIKIyS7KIZ7sJuclQB0iw7RpO/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en del cuento al butai.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Casos de éxito, experiencias innovadoras y buenas prácticas docentes",
+                author: "Elena Vercher Ribis"
+            },
+            {
+                title: "INNOVACIÓN DOCENTE EN EDUCACIÓN SUPERIOR: TENDENCIAS, DESAFÍOS Y LÍNEAS DE FUTURO",
+                url: "https://www.youtube.com/watch?v=WTexP5sv2ao",
+                platform: "YouTube",
+                description: "Presentación centrada en innovación docente en educación superior.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Casos de éxito, experiencias innovadoras y buenas prácticas docentes",
+                author: "Desir\u00E9e Ayuso del Puerto; Francisca Ang\u00E9lica Monroy Garc\u00EDa"
+            },
+            {
+                title: "PRÁCTICAS CIENTÍFICAS Y DIARIOS DE INVESTIGACIÓN PARA EMPODERAR A LAS NIÑAS EN STEAM: EL PROYECTO MUJERES ACONCIENCIA",
+                url: "https://uses0-my.sharepoint.com/...",
+                platform: "SharePoint/OneDrive",
+                description: "Describe una experiencia o propuesta práctica en empoderamiento de niñas en steam.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Casos de éxito, experiencias innovadoras y buenas prácticas docentes",
+                author: "Autor\u00EDa no visible: el enlace est\u00E1 incompleto"
+            },
+            {
+                title: "Alfabetización en inteligencia artificial, confianza calibrada y sesgo de género",
+                url: "http://citeg.es",
+                platform: "CITEG (sin destino externo de vídeo)",
+                description: "Analiza alfabetización en inteligencia artificial, confianza calibrada y sesgo de género.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Inteligencia artificial y equidad de género",
+                author: "Autor\u00EDa no visible: no hay v\u00EDdeo enlazado"
+            },
+            {
+                title: "¿Brecha digital de género o perfiles de uso diferenciados? Alfabetización en inteligencia artificial en la formación inicial docente",
+                url: "https://www.youtube.com/watch?v=Zo4GB-Wj2JY",
+                platform: "YouTube",
+                description: "Examina perfiles de uso diferenciados y alfabetización en inteligencia artificial.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Inteligencia artificial y equidad de género",
+                author: "A. Ja\u00E9n-Mart\u00EDnez; A. M. Mart\u00EDn Caraballo; A. P\u00E9rez Garc\u00EDa; J. Luengo L\u00F3pez"
+            },
+            {
+                title: "El futuro profesorado y el diseño de imágenes coeducativas con IA: perfil de uso y formación",
+                url: "https://onedrive.live.com/...",
+                platform: "SharePoint/OneDrive",
+                description: "Presentación centrada en el futuro profesorado y el diseño de imágenes coeducativas con ia.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Inteligencia artificial y equidad de género",
+                author: "Autor\u00EDa no visible: el enlace est\u00E1 incompleto"
+            },
+            {
+                title: "Fabricar el cuerpo: género, deseo y control en la robótica y la inteligencia artificial",
+                url: "https://drive.google.com/file/d/1AXXcxTTkipLaHKZcZy_boCzfu-Zc-v9z/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en fabricar el cuerpo: género, deseo y control en la robótica y la inteligencia artificial.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Inteligencia artificial y equidad de género",
+                author: "Triana S\u00E1nchez Hevia"
+            },
+            {
+                title: "La tecnología en el articulismo de opinión femenino: la inteligencia artificial y los algoritmos en \"el atlas de pandora\" de Irene Vallejo",
+                url: "https://drive.google.com/file/d/16xKdkxARLQtGfFOWXFLiyowhPOI1onDz/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en la tecnología en el articulismo de opinión femenino.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Inteligencia artificial y equidad de género",
+                author: "Luc\u00EDa C\u00E1novas Moreno"
+            },
+            {
+                title: "Diseño y desarrollo de \"EquIAtext\": una herramienta web basada en IA para promover el lenguaje no sexista",
+                url: "https://unexes-my.sharepoint.com/...",
+                platform: "SharePoint/OneDrive",
+                description: "Presenta una propuesta de diseño de herramienta web para promover el lenguaje no sexista.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Inteligencia artificial y equidad de género",
+                author: "Autor\u00EDa no visible: el enlace est\u00E1 incompleto"
+            },
+            {
+                title: "A quién imagina la inteligencia artificial? Auditoría piloto de asociaciones de género y ocupación en un modelo generativo",
+                url: "https://www.youtube.com/watch?v=5s7u2KDr3Rg",
+                platform: "YouTube",
+                description: "Examina a quién imagina la inteligencia artificial en asociaciones de género y ocupación.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Inteligencia artificial y equidad de género",
+                author: "Gerardo Arriaza Fern\u00E1ndez"
+            },
+            {
+                title: "EL GÉNERO COMO CONTENIDO PERO NO COMO CATEGORÍA ANALÍTICA EN LA INVESTIGACIÓN SOBRE ALFABETIZACIÓN EN IA EN EDUCACIÓN PRIMARIA",
+                url: "https://drive.google.com/file/d/1mNqlsAPDTroJQQ9MIluH0bWh3ASRVyOS/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en el género como contenido pero no como categoría analítica.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Inteligencia artificial y equidad de género",
+                author: "Leire Junguitu-Angulo; Amaia Arroyo-Sagasta; Ainara Bilbao-Era\u00F1a"
+            },
+            {
+                title: "De la pornografía a la conciencia crítica en formación profesional: Fundamentos para una propuesta aplicada de aprendizaje servicio",
+                url: "https://drive.google.com/file/d/1UGQhTvVoU-ZcFbvkIH7mnMbp6SgrXJ-S/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en de la pornografía a la conciencia crítica en formación profesional.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Inteligencia artificial y equidad de género",
+                author: "Melina Abril Moreyra-Gait\u00E1n; Milena Villar Varela; Sabina Louz\u00E1n-Freitas"
+            },
+            {
+                title: "Rastreando la huella de género digital: Cómo los chatbots educan el consentimiento según a quién le hablen",
+                url: "https://www.youtube.com/watch?v=VkQvuOYHh4Q",
+                platform: "YouTube",
+                description: "Presentación centrada en rastreando la huella de género digital.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Inteligencia artificial y equidad de género",
+                author: "Eva Mar\u00EDa Jim\u00E9nez And\u00FAjar"
+            },
+            {
+                title: "Sesgos de género y accesibilidad en actividades de danza generadas por Inteligencia Artificial.",
+                url: "https://www.youtube.com/watch?v=d0GO5AyNlxU",
+                platform: "YouTube",
+                description: "Analiza sesgos de género y accesibilidad en actividades de danza generadas por inteligencia artificial.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Inteligencia artificial y equidad de género",
+                author: "Sara Lobato D\u00EDaz"
+            },
+            {
+                title: "Hacia una educación equitativa: revisión de prácticas para la enseñanza de stem y la reducción de la brecha de género",
+                url: "https://drive.google.com/file/d/1zb5cBmx5U9_TSTAMxmYrrWc_fVTJ2ylY/view",
+                platform: "Google Drive",
+                description: "Sintetiza la evidencia disponible sobre hacia una educación equitativa.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Mujeres en STEAM",
+                author: "Manuel Enrique Lorenzo Mart\u00EDn; Marina Garc\u00EDa Carmona; Jos\u00E9 Antonio Mart\u00EDnez Domingo; Carmen Roc\u00EDo Fern\u00E1ndez Fern\u00E1ndez"
+            },
+            {
+                title: "Diseñar la equidad antes del aula: una rúbrica con perspectiva de género para evaluar actividades steam con inteligencia artificial",
+                url: "https://drive.google.com/file/d/1j5n2zCLX846z_h34J8NLN_IL_a29i2WF/view",
+                platform: "Google Drive",
+                description: "Presenta una propuesta de diseño para evaluar actividades steam con inteligencia artificial.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Mujeres en STEAM",
+                author: "Itziar Sagastizabal-S\u00E1ez; Arantzazu L\u00F3pez de la Serna; Urtza Garay-Ruiz"
+            },
+            {
+                title: "Del uso a la agencia: mujeres y creación tecnológica en el arte electrónico-digital contemporáneo",
+                url: "https://www.youtube.com/watch?v=0dSexd0vqgk",
+                platform: "YouTube",
+                description: "Presentación centrada en mujeres y creación tecnológica en el arte electrónico-digital.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Mujeres en STEAM",
+                author: "Olga Albillos Castillo"
+            },
+            {
+                title: "MAKERWOMENSTEM: APORTES A LA INNOVACIÓN, LA EQUIDAD Y LA TRANSFORMACIÓN SOCIAL EN LA GUAJIRA",
+                url: "https://drive.google.com/file/d/1P1If-FjJ_8ClU3wsodRt_9fNlwu4FFJS/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en makerwomenstem: aportes a la innovación, la equidad y la transformación social.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Mujeres en STEAM",
+                author: "Alba Ruth Pinto Santos"
+            },
+            {
+                title: "FENÓMENO DEL IMPOSTOR, ANSIEDAD Y AUTOEVALUACIÓN ACADÉMICA: DIFERENCIAS DE GÉNERO EN UNIVERSITARIOS MEXICANOS",
+                url: "https://drive.google.com/file/d/10REkh6rdLdBJIGYh1IE6iuKrWQ-GqBVQ/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en fenómeno del impostor, ansiedad y autoevaluación académica.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Mujeres en STEAM",
+                author: "Benito Javier Mart\u00EDnez-Briones; C\u00E9sar Merino-Soto; In\u00E9s \u00C1lvarez-Icaza"
+            },
+            {
+                title: "DISEÑO INSTRUCCIONAL PARA LA CREACIÓN DE REDES EN GÉNERO Y TECNOLOGÍAS: LA EXPERIENCIA MAKER WOMEN STEM",
+                url: "https://tecmx-my.sharepoint.com/...",
+                platform: "SharePoint/OneDrive",
+                description: "Presenta una propuesta de diseño instruccional para la creación de redes en género.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Mujeres en STEAM",
+                author: "Alba Ruth Pinto Santos"
+            },
+            {
+                title: "INCLUSIÓN DE GÉNERO EN I+D+i. MARCO GENERAL EN NLP Y XR/METAVERSO",
+                url: "https://www.youtube.com/watch?v=n1n1V6RAMmM",
+                platform: "YouTube",
+                description: "Presentación centrada en inclusión de género en i+d+i. marco general en nlp y xr/metaverso.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Proyectos institucionales desde la perspectiva de la inclusión educativa",
+                author: "Amor\u00F3s et al. (nombres no visibles en la portada)"
+            },
+            {
+                title: "Competencias digitales del profesorado en la formación inicial de docentes a través del enfoque STEAM: EL pensamiento computacional y de diseño como una dimensión poco explorada",
+                url: "https://drive.google.com/file/d/1zb5cBmx5U9_TSTAMxmYrrWc_fVTJ2ylY/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en competencias digitales del profesorado.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Tecnologías educativas y aprendizaje inclusivo",
+                author: "Carmen Roc\u00EDo Fern\u00E1ndez Fern\u00E1ndez"
+            },
+            {
+                title: "Educación sexual digital, género y ciudadanía tecnológica: análisis comparado de materiales didácticos de España y Portugal",
+                url: "https://nubeusc-my.sharepoint.com/...",
+                platform: "SharePoint/OneDrive",
+                description: "Presentación centrada en educación sexual digital, género y ciudadanía tecnológica.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Tecnologías educativas y aprendizaje inclusivo",
+                author: "Autor\u00EDa no visible: el enlace est\u00E1 incompleto"
+            },
+            {
+                title: "Uso de Padlet en la construcción colectiva de conocimientos sobre valores ambientales",
+                url: "https://www.youtube.com/watch?v=Qa3It4V2jXI",
+                platform: "YouTube",
+                description: "Estudia uso de padlet en la construcción colectiva de conocimientos sobre valores ambientales.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Tecnologías educativas y aprendizaje inclusivo",
+                author: "Jeanette Chaljub Hasb\u00FAn"
+            },
+            {
+                title: "Evolución de la brecha de género en el uso de la inteligencia artificial en españa a partir de openai 2024-2026",
+                url: "https://www.youtube.com/watch?v=5HtEG9-i7S0",
+                platform: "YouTube",
+                description: "Analiza y evalúa evolución de la brecha de género en el uso de la inteligencia artificial en españa.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Tecnologías educativas y aprendizaje inclusivo",
+                author: "Alicia (apellido no visible en la portada)"
+            },
+            {
+                title: "La realidad virtual como herramienta tic: estudio sobre su aceptación en el alumnado de ciencias de la educación de la Universidad de Sevilla",
+                url: "https://www.youtube.com/watch?v=P_DvudKFpyU",
+                platform: "YouTube",
+                description: "Estudia la realidad virtual como herramienta tic en el alumnado.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Tecnologías educativas y aprendizaje inclusivo",
+                author: "\u00D3scar Gallego P\u00E9rez"
+            },
+            {
+                title: "APORTACIONES DEL ESPACIO EDUCATIVO A LA ACCESIBILIDAD COGNITIVA: UN ESTUDIO DE CASO DESDE EL MARCO DUA",
+                url: "https://drive.google.com/file/d/1zOPy-F5G-BYT4V5nUL1E84F_LlDSzpmN/view",
+                platform: "Google Drive",
+                description: "Presentación centrada en aportaciones del espacio educativo a la accesibilidad cognitiva.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Tecnologías educativas y aprendizaje inclusivo",
+                author: "Aitor Y\u00E1\u00F1ez-Perea; Naiara Bilbao-Quintana; Eneko Tejada-Garitano"
+            },
+            {
+                title: "SESGO DE GÉNERO EN LA IDENTIFICACIÓN Y EL DESARROLLO EDUCATIVO DEL ALUMNADO CON ALTAS CAPACIDADES: UNA REVISIÓN CRÍTICA DE LA LITERATURA",
+                url: "https://drive.google.com/file/d/1NtvkUx6KvYTef1wTKKRs-Ql-06p5bySr/view",
+                platform: "Google Drive",
+                description: "Sintetiza la evidencia disponible sobre sesgo de género en altas capacidades.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Tecnologías educativas y aprendizaje inclusivo",
+                author: "Pablo Cavero L\u00F3pez; Jos\u00E9 Fern\u00E1ndez Cerero; Marta Montenegro Rueda; Amanda Serna Delgado"
+            },
+            {
+                title: "SPANISH FEMALE YOUTH’S MOTIVATION TO ENGAGE IN ARTIFICIAL INTELLIGENCE-ASSISTED INFORMAL LANGUAGE LEARNING",
+                url: "https://www.youtube.com/watch?v=sslzzuS-FA4",
+                platform: "YouTube",
+                description: "Presentación centrada en spanish female youth’s motivation to engage in artificial intelligence-assisted informal language learning.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Tecnologías educativas y aprendizaje inclusivo",
+                author: "Barbara Husarova"
+            },
+            {
+                title: "TECHNOLOGY-MEDIATED INFORMAL LANGUAGE LEARNING: MULTIMODAL INPUT AND GENDER STEREOTYPES AMONG SPANISH YOUTH",
+                url: "https://www.youtube.com/watch?v=dl0nWq9y-Uk",
+                platform: "YouTube",
+                description: "Presentación centrada en technology-mediated informal language learning.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Tecnologías educativas y aprendizaje inclusivo",
+                author: "Barbara Husarova"
+            },
+            {
+                title: "Tecnologías multisensoriales emergentes para una danza inclusiva: experiencias, buenas prácticas y retos.",
+                url: "https://www.youtube.com/watch?v=XsEtw9OH09o",
+                platform: "YouTube",
+                description: "Describe una experiencia o propuesta práctica relacionada con tecnologías multisensoriales emergentes para una danza inclusiva.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Tecnologías educativas y aprendizaje inclusivo",
+                author: "Sara Lobato D\u00EDaz"
+            },
+            {
+                title: "APRENDIZAJE BASADO EN JUEGO CON PERSONAS SENIOR: Una experiencia con el videojuego KORAL",
+                url: "https://drive.google.com/file/d/15_4bmLekR2C0G_7kzaMJcqG8pruxiEGI/view",
+                platform: "Google Drive",
+                description: "Describe una experiencia o propuesta práctica relacionada con aprendizaje basado en juego con personas senior.",
+                category: "Comunicaciones virtuales",
+                subcategory: "Tecnologías educativas y aprendizaje inclusivo",
+                author: "Caterina Assumpta Vallcaneras Morro; Gemma Tur Ferrer; Jorge Oceja"
+            }
+        ];
+
+        function App() {
+            const [searchTerm, setSearchTerm] = React.useState('');
+            const [filterCategory, setFilterCategory] = React.useState('All');
+            const [filterPlatform, setFilterPlatform] = React.useState('All');
+
+            const filteredData = data.filter(item => {
+                const searchLower = searchTerm.toLowerCase();
+                const matchesSearch = item.title.toLowerCase().includes(searchLower) || 
+                                      (item.author && item.author.toLowerCase().includes(searchLower));
+                const matchesCategory = filterCategory === 'All' || item.category === filterCategory;
+                const matchesPlatform = filterPlatform === 'All' || item.platform === filterPlatform;
+                
+                return matchesSearch && matchesCategory && matchesPlatform;
+            });
+
+            const getPlatformIcon = (platform) => {
+                switch(platform) {
+                    case 'YouTube': return <i className="fa-brands fa-youtube text-red-500"></i>;
+                    case 'Google Drive': return <i className="fa-brands fa-google-drive text-blue-500"></i>;
+                    case 'SharePoint/OneDrive': return <i className="fa-brands fa-microsoft text-blue-700"></i>;
+                    case 'Zoom': return <i className="fa-solid fa-video text-blue-400"></i>;
+                    default: return <i className="fa-solid fa-link text-gray-500"></i>;
+                }
+            };
+
+            const getCategoryColor = (category) => {
+                return category === 'Simposios' ? 'bg-indigo-100 text-indigo-800' : 'bg-emerald-100 text-emerald-800';
+            };
+
+            return (
+                <div className="min-h-screen">
+                    {/* Header */}
+                    <header className="bg-brand-900 text-white py-12 shadow-lg">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h1 className="text-4xl font-extrabold tracking-tight">CITEG 2026</h1>
+                            <p className="mt-2 text-xl text-brand-100">Directorio de Presentaciones en Vídeo</p>
+                            
+                            <div className="mt-6 flex flex-wrap gap-4 text-sm font-medium">
+                                <div className="bg-brand-600 px-4 py-2 rounded-full">
+                                    <i className="fa-brands fa-youtube mr-2"></i>39 YouTube
+                                </div>
+                                <div className="bg-brand-600 px-4 py-2 rounded-full">
+                                    <i className="fa-brands fa-google-drive mr-2"></i>53 Google Drive
+                                </div>
+                                <div className="bg-brand-600 px-4 py-2 rounded-full">
+                                    <i className="fa-brands fa-microsoft mr-2"></i>15 SharePoint/OneDrive
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Main Content */}
+                    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                        
+                        {/* Filters */}
+                        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-8 flex flex-col md:flex-row gap-4 items-center justify-between sticky top-4 z-10">
+                            
+                            <div className="w-full md:w-1/3 relative">
+                                <i className="fa-solid fa-search absolute left-3 top-3 text-gray-400"></i>
+                                <input 
+                                    type="text" 
+                                    placeholder="Buscar por título o autor/a..." 
+                                    className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="flex w-full md:w-auto gap-4">
+                                <select 
+                                    className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+                                    value={filterCategory}
+                                    onChange={(e) => setFilterCategory(e.target.value)}
+                                >
+                                    <option value="All">Todas las Categorías</option>
+                                    <option value="Simposios">Simposios</option>
+                                    <option value="Comunicaciones virtuales">Comunicaciones Virtuales</option>
+                                </select>
+
+                                <select 
+                                    className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+                                    value={filterPlatform}
+                                    onChange={(e) => setFilterPlatform(e.target.value)}
+                                >
+                                    <option value="All">Todas las Plataformas</option>
+                                    <option value="YouTube">YouTube</option>
+                                    <option value="Google Drive">Google Drive</option>
+                                    <option value="SharePoint/OneDrive">SharePoint/OneDrive</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        {/* Results count */}
+                        <div className="mb-4 text-gray-600 font-medium">
+                            Mostrando {filteredData.length} {filteredData.length === 1 ? 'presentación' : 'presentaciones'}
+                        </div>
+
+                        {/* Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {filteredData.map((item, index) => (
+                                <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col h-full overflow-hidden">
+                                    <div className="p-6 flex-grow">
+                                        <div className="flex justify-between items-start mb-4 gap-2">
+                                            <span className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${getCategoryColor(item.category)}`}>
+                                                {item.category}
+                                            </span>
+                                            <span className="flex items-center gap-1 text-sm font-medium text-gray-600 bg-gray-100 px-2 py-1 rounded-md" title={item.platform}>
+                                                {getPlatformIcon(item.platform)}
+                                            </span>
+                                        </div>
+                                        
+                                        <p className="text-xs font-semibold text-brand-600 mb-2 uppercase tracking-wide">
+                                            {item.subcategory}
+                                        </p>
+                                        
+                                        <h3 className="text-lg font-bold text-gray-900 mb-3 leading-tight">
+                                            {item.title}
+                                        </h3>
+                                        
+                                        {}
+                                        <p className="text-sm text-gray-600 flex items-start gap-2 mt-auto">
+                                            <i className="fa-regular fa-user mt-1 text-gray-400"></i>
+                                            <span>{item.author || 'Autor/a no especificado'}</span>
+                                        </p>
+                                    </div>
+                                    
+                                    <div className="p-4 border-t bg-gray-50">
+                                        <a href={item.url} target="_blank" rel="noopener noreferrer" 
+                                           className="block w-full text-center px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-lg transition-colors">
+                                           Ver Presentación <i className="fa-solid fa-arrow-up-right-from-square ml-1 text-xs"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        
+                        {filteredData.length === 0 && (
+                            <div className="text-center py-20">
+                                <i className="fa-regular fa-folder-open text-6xl text-gray-300 mb-4"></i>
+                                <h3 className="text-xl font-semibold text-gray-600">No se encontraron resultados</h3>
+                                <p className="text-gray-500 mt-2">Prueba modificando los filtros de búsqueda.</p>
+                                <button 
+                                    onClick={() => {setSearchTerm(''); setFilterCategory('All'); setFilterPlatform('All');}}
+                                    className="mt-4 px-4 py-2 bg-brand-100 text-brand-700 rounded-lg hover:bg-brand-200"
+                                >
+                                    Limpiar filtros
+                                </button>
+                            </div>
+                        )}
+                    </main>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
